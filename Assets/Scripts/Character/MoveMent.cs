@@ -5,10 +5,11 @@ using UnityEngine;
 public class MoveMent : MonoBehaviour
 {
     public float speed = 5f;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,5 +21,10 @@ public class MoveMent : MonoBehaviour
         position.x += moveX * speed * Time.deltaTime;
         position.y += moveY * speed * Time.deltaTime;
         transform.position = position;
+        anim.SetBool("taunt", false);
+        if(Input.GetKeyDown("space"))
+        {
+            anim.SetBool("taunt", true);
+        }
     }
 }
