@@ -25,6 +25,11 @@ public class MoveMent : MonoBehaviour
         position.x += moveX * speed * Time.deltaTime;
         position.y += moveY * speed * Time.deltaTime;
         transform.position = position;
+        anim.SetBool("taunt", false);
+        if(Input.GetKeyDown("space"))
+        {
+            anim.SetBool("taunt", true);
+        }
 
         Vector2 moveVector = new Vector2(moveX, moveY);
         if (moveVector.x != 0 || moveVector.y != 0)
