@@ -5,10 +5,15 @@ using UnityEngine;
 public class MoveMent : MonoBehaviour
 {
     public float speed = 5f;
+
+    private Animator anim;
+
+    private Vector2 lookDirection = new Vector2(1, 0);
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,5 +25,15 @@ public class MoveMent : MonoBehaviour
         position.x += moveX * speed * Time.deltaTime;
         position.y += moveY * speed * Time.deltaTime;
         transform.position = position;
+
+        Vector2 moveVector = new Vector2(moveX, moveY);
+        if (moveVector.x != 0 || moveVector.y != 0)
+        {
+            lookDirection = moveVector;
+        }
+
+        anim.SetFloat("lookX", lookDirection.x);
+        anim.SetFloat("lookY", lookDirection.y);
+        anim.SetFloat("speed", moveVector.magnitude);
     }
 }
