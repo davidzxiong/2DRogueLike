@@ -14,6 +14,7 @@ public class MoveMent : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        anim.SetFloat("lookX", 1);
     }
 
     // Update is called once per frame
@@ -25,11 +26,11 @@ public class MoveMent : MonoBehaviour
         position.x += moveX * speed * Time.deltaTime;
         position.y += moveY * speed * Time.deltaTime;
         transform.position = position;
-        anim.SetBool("taunt", false);
-        if(Input.GetKeyDown("space"))
-        {
-            anim.SetBool("taunt", true);
-        }
+    //    anim.SetBool("taunt", false);
+   //     if(Input.GetKeyDown("space"))
+   //     {
+   //         anim.SetBool("taunt", true);
+  //      }
 
         Vector2 moveVector = new Vector2(moveX, moveY);
         if (moveVector.x != 0 || moveVector.y != 0)
@@ -37,7 +38,15 @@ public class MoveMent : MonoBehaviour
             lookDirection = moveVector;
         }
 
-        anim.SetFloat("lookX", lookDirection.x);
+         
+        
+        if (moveX > 0)
+        {
+            anim.SetFloat("lookX", 1);
+        } else if (moveX < 0)
+        {
+            anim.SetFloat("lookX", -1);
+        }
         anim.SetFloat("lookY", lookDirection.y);
         anim.SetFloat("speed", moveVector.magnitude);
     }
